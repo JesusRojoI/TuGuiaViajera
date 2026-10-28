@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 84" role="img" aria-label="Tu Guía Viajera">
+  <g>
+    <rect x="3" y="8" width="64" height="64" rx="19" fill="#F6EFE2"/>
+    <rect x="6.6" y="11.6" width="56.8" height="56.8" rx="15.5" fill="none" stroke="#0C3B35" stroke-opacity=".25" stroke-width="1"/>
+    <path d="M13 58 C22 54 19.5 44.5 29 40.5 S43 42 48.5 27" fill="none" stroke="#0C3B35" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 6.2"/>
+    <circle cx="48.5" cy="27" r="7.2" fill="#F6EFE2" stroke="#C85A3A" stroke-width="2"/>
+    <circle cx="48.5" cy="27" r="2.9" fill="#C85A3A"/>
+    <g stroke="#C85A3A" stroke-width="1.6" stroke-linecap="round">
+      <path d="M18 20.5v-5"/><path d="M18 31.5v-5"/><path d="M12.5 26h5"/><path d="M18.5 26h5"/>
+    </g>
+    <circle cx="18" cy="26" r="2.4" fill="#C85A3A"/>
+    <circle cx="52" cy="55" r="1.7" fill="#0C3B35" opacity=".55"/>
+    <circle cx="46" cy="58" r="1.2" fill="#0C3B35" opacity=".35"/>
+  </g>
+  <text x="84" y="39" font-family="'Caveat','Segoe Script',cursive" font-size="26" fill="#EAB64C" font-weight="600">tu guía</text>
+  <text x="82" y="67" font-family="'Fraunces','Georgia',serif" font-size="31" letter-spacing="5.5" fill="#F6EFE2" font-weight="600">VIAJERA</text>
+  <text x="84" y="79" font-family="'Manrope','Arial',sans-serif" font-size="6.4" letter-spacing="3.1" fill="#EAB64C">MÉXICO A TU MESA</text>
+</svg>
