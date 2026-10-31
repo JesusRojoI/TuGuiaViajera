@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 import esMessages from '../../messages/es.json';
 import enMessages from '../../messages/en.json';
 import type { Locale, OrderSummary } from '@/types';
+import { formatMXN } from '@/lib/format';
 
 const messagesMap = { es: esMessages, en: enMessages };
 const BRAND = 'Tu Guía Viajera';
@@ -175,14 +176,6 @@ function escapeHtml(value: string | number | undefined | null) {
     .replace(/'/g, '&#39;');
 }
 
-function currency(value: number, locale: Locale) {
-  return new Intl.NumberFormat(locale === 'es' ? 'es-MX' : 'en-US', {
-    style: 'currency',
-    currency: 'MXN',
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
 function longDate(value: string, locale: Locale) {
   if (!value) return '—';
   const date = new Date(`${value}T12:00:00`);
@@ -344,7 +337,7 @@ function orderRows(order: OrderSummary, locale: Locale) {
           )} · ${item.quantity} ${escapeHtml(p.travelers)}</p>
         </td>
         <td style="padding:11px 0;border-bottom:1px solid rgba(12,59,53,0.1);text-align:right;white-space:nowrap;vertical-align:top;color:${palette.jade};font-weight:bold;">
-          ${escapeHtml(currency(item.price * item.quantity, locale))}
+          ${escapeHtml(formatMXN(item.price * item.quantity, locale))}
         </td>
       </tr>`
     )
@@ -358,15 +351,15 @@ function orderTotals(order: OrderSummary, locale: Locale) {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:18px;background:${palette.cream};border-radius:12px;padding:4px;">
       <tr>
         <td style="padding:10px 14px;font-size:13px;color:${palette.muted};">${escapeHtml(p.subtotal)}</td>
-        <td style="padding:10px 14px;text-align:right;font-size:13px;color:${palette.ink};">${escapeHtml(currency(order.total, locale))}</td>
+        <td style="padding:10px 14px;text-align:right;font-size:13px;color:${palette.ink};">${escapeHtml(formatMXN(order.total, locale))}</td>
       </tr>
       <tr>
         <td style="padding:0 14px 10px;font-size:13px;color:${palette.muted};">${escapeHtml(p.tax)}</td>
-        <td style="padding:0 14px 10px;text-align:right;font-size:13px;color:${palette.ink};">${escapeHtml(currency(included, locale))}</td>
+        <td style="padding:0 14px 10px;text-align:right;font-size:13px;color:${palette.ink};">${escapeHtml(formatMXN(included, locale))}</td>
       </tr>
       <tr>
         <td style="padding:10px 14px;border-top:1px solid rgba(12,59,53,0.14);font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:bold;color:${palette.jade};">${escapeHtml(p.total)}</td>
-        <td style="padding:10px 14px;border-top:1px solid rgba(12,59,53,0.14);text-align:right;font-size:20px;font-weight:bold;color:${palette.jade};">${escapeHtml(currency(order.total, locale))} MXN</td>
+        <td style="padding:10px 14px;border-top:1px solid rgba(12,59,53,0.14);text-align:right;font-size:20px;font-weight:bold;color:${palette.jade};">${escapeHtml(formatMXN(order.total, locale))}</td>
       </tr>
     </table>`;
 }
@@ -429,7 +422,7 @@ export async function sendPurchaseEmails(order: OrderSummary, locale: Locale) {
 
   const adminHtml = shell({
     title: p.adminTitle,
-    preheader: `${order.customer.name} · ${currency(order.total, locale)}`,
+    preheader: `${order.customer.name} · ${formatMXN(order.total, locale)}`,
     locale,
     body: detailBody,
   });

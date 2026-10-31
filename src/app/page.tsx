@@ -6,6 +6,7 @@ import { FeaturedRoutes } from '@/components/home/FeaturedRoutes';
 import { Story } from '@/components/home/Story';
 import { FAQ } from '@/components/home/FAQ';
 import { MomentsGallery } from '@/components/home/MomentsGallery';
+import { RouteStoryCTA } from '@/components/home/RouteStoryCTA';
 import { FinalCTA } from '@/components/home/FinalCTA';
 
 export default function HomePage() {
@@ -19,6 +20,7 @@ export default function HomePage() {
       <Story />
       <FAQ />
       <MomentsGallery />
+      <RouteStoryCTA />
       <FinalCTA />
     </>
   );

@@ -23,6 +23,7 @@
     "hours": "Lun a Vie · 9:00 a 18:00 h CDMX"
   },
   "common": {
+    "mxnPrefix": "MXN",
     "from": "Desde",
     "perPerson": "Por persona",
     "vatIncluded": "IVA Incluido",
@@ -98,6 +99,11 @@
     "experiences": "experiencias"
   },
   "home": {
+    "routeStory": {
+      "line1": "Cada ruta tiene cocineras.",
+      "line2": "Cada cocinera, una historia.",
+      "cta": "Diseña tu ruta"
+    },
     "hero": {
       "eyebrow": "Rutas para comer México",
       "title1": "Prueba el",
@@ -380,6 +386,7 @@
     "interestPlaceholder": "Elige una opción"
   },
   "cart": {
+    "adultsLine": "adultos",
     "eyebrow": "Tu reserva",
     "title": "Tu carrito",
     "emptyTitle": "Tu carrito está vacío",
@@ -403,6 +410,7 @@
     "taxIncluded": "IVA incluido (16%)"
   },
   "checkout": {
+    "adultsLine": "adultos",
     "eyebrow": "Pago protegido",
     "title": "Completa tu reserva",
     "description": "Captura tus datos y realiza el pago. Recibirás el itinerario completo por correo en menos de 24 horas.",
@@ -418,6 +426,8 @@
     "postalCode": "Código postal",
     "country": "País",
     "countryDefault": "México",
+    "locationTitle": "País y estado",
+    "locationNote": "Selecciona un país y un estado para completar la demostración. Estos datos no se guardan.",
     "company": "Empresa",
     "cardTitle": "Información de la tarjeta",
     "cardNumber": "Número de tarjeta",
@@ -428,6 +438,11 @@
     "pay": "Pagar",
     "processing": "Procesando el pago…",
     "secureNote": "La información se transmite cifrada y el pago lo procesa Etomin.",
+    "couponPrompt": "¿Tienes un cupón? Haz clic aquí para introducir tu código.",
+    "couponLabel": "Código de descuento",
+    "couponApply": "Aplicar",
+    "couponInvalid": "Este cupón no es válido.",
+    "couponRequired": "Introduce un código de cupón.",
     "summaryTitle": "Reserva",
     "items": "Experiencias",
     "subtotal": "Subtotal",
@@ -439,7 +454,6 @@
     "errorGeneric": "Verifica los datos de la tarjeta y vuelve a intentarlo. Si el problema sigue, escríbenos a support@tuguiaviajera.com.",
     "paymentNotConfigured": "La pasarela de pago no está habilitada. Escríbenos a support@tuguiaviajera.com para terminar tu reserva.",
     "validationError": "Revisa los campos señalados y vuelve a intentarlo.",
-    "etominNote": "Etomin procesa el pago de forma segura",
     "termsConjunction": "y el",
     "terms": "Acepto los términos y condiciones y el aviso de privacidad.",
     "termsLink": "términos y condiciones",
@@ -473,6 +487,7 @@
     "updated": "Última actualización"
   },
   "footer": {
+    "address": "Av. Revolución 1564, San Ángel, Álvaro Obregón, 01020 Ciudad de México, CDMX",
     "tagline": "El sabor de México, servido en su mesa y contado en su lengua.",
     "description": "Recorridos e inmersiones gastronómicas con cocineras de tradición, productores y mercados con historia.",
     "exploreTitle": "Descubre",

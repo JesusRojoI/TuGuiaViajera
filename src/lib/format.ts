@@ -1,19 +1,13 @@
 export function formatMXN(value: number, locale: 'es' | 'en' = 'es') {
-  return new Intl.NumberFormat(locale === 'es' ? 'es-MX' : 'en-US', {
-    style: 'currency',
-    currency: 'MXN',
-    maximumFractionDigits: 0,
+  const formatted = new Intl.NumberFormat(locale === 'es' ? 'es-MX' : 'en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(value);
+  return `MXN$${formatted}`;
 }
 
 export function formatMXNCompact(value: number, locale: 'es' | 'en' = 'es') {
-  const formatted = new Intl.NumberFormat(
-    locale === 'es' ? 'es-MX' : 'en-US',
-    {
-      maximumFractionDigits: 0,
-    }
-  ).format(value);
-  return `$${formatted}`;
+  return formatMXN(value, locale);
 }
 
 export function formatDate(value: string, locale: 'es' | 'en' = 'es') {

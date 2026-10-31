@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { formatPrice } from '@/lib/utils';
+import { Price } from '@/components/Price';
 import type { Product } from '@/types';
 
 const categoryKey: Record<Product['category'], string> = {
@@ -76,8 +76,7 @@ export function ProductCard({
               {t('common.from')}
             </p>
             <p className="font-display text-[1.35rem] font-medium leading-none text-jade-900">
-              {formatPrice(product.price, locale)}
-              <span className="ml-1 font-sans text-[0.55rem] font-bold tracking-wider text-muted/70">MXN</span>
+              <Price value={product.price} locale={locale} />
             </p>
           </div>
           <div className="text-right">

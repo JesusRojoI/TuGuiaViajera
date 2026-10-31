@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { ArrowUpRight, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -22,18 +21,6 @@ export function FAQ() {
           <p className="mt-5 max-w-sm text-[0.92rem] leading-relaxed text-muted">
             {t('home.faq.subtitle')}
           </p>
-          <div className="mt-8 rounded-2xl border border-jade-900/10 bg-cream-50 p-5">
-            <p className="script text-[1.45rem] leading-tight text-clay-600">
-              {t('contact.quote')}
-            </p>
-            <Link
-              href="/contacto"
-              className="mt-5 inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-jade-900 transition-colors hover:text-clay-600"
-            >
-              {t('home.faq.cta')}
-              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.9} />
-            </Link>
-          </div>
         </Reveal>
 
         <Reveal delay={1} className="divide-y divide-jade-900/10 border-y border-jade-900/10">

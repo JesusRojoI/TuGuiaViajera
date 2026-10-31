@@ -58,10 +58,10 @@ export function Hero() {
             </p>
 
             <div className="mt-8 flex animate-fade-up flex-col gap-3 [animation-delay:320ms] sm:flex-row sm:items-center">
-              <Link href="/rutas" className="btn btn-maize">
+              <a href="#rutas-destacadas" className="btn btn-maize">
                 {t('home.hero.cta1')}
                 <ArrowUpRight className="h-4 w-4" strokeWidth={1.9} />
-              </Link>
+              </a>
               <Link href="/contacto" className="btn btn-outline-light">
                 {t('home.hero.cta2')}
               </Link>

@@ -21,10 +21,11 @@ import {
   X,
 } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
+import { Price } from '@/components/Price';
 import { Reveal } from '@/components/Reveal';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { formatPrice, todayISO } from '@/lib/utils';
+import { todayISO } from '@/lib/utils';
 import { products } from '@/data/products';
 import type { Product } from '@/types';
 
@@ -183,10 +184,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                   </p>
                   <div className="mt-1 flex items-end justify-between gap-3">
                     <p className="font-display text-[2.3rem] font-medium leading-none">
-                      {formatPrice(product.price, locale)}
-                      <span className="ml-1.5 font-sans text-[0.6rem] font-bold tracking-widest text-cream-100/60">
-                        MXN
-                      </span>
+                      <Price value={product.price} locale={locale} />
                     </p>
                     <span className="rounded-full border border-cream-100/20 bg-cream-100/10 px-3 py-1 text-[0.55rem] font-bold uppercase tracking-[0.1em] text-cream-100/80">
                       {t('product.taxNote')}
@@ -257,7 +255,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
                       {t('common.total')}
                     </span>
                     <span className="font-display text-xl font-medium text-jade-900">
-                      {formatPrice(total, locale)}
+                      <Price value={total} locale={locale} />
                     </span>
                   </div>
 

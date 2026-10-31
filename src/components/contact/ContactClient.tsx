@@ -346,19 +346,6 @@ export function ContactClient() {
           </Reveal>
         </div>
       </section>
-
-      <section className="border-t border-jade-900/10 bg-cream-200 py-14 md:py-16">
-        <div className="container-tgv flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-          <div>
-            <h2 className="font-display text-2xl font-medium text-jade-900 md:text-3xl">{t('contact.ctaTitle')}</h2>
-            <p className="mt-2 max-w-xl text-[0.88rem] leading-relaxed text-muted">{t('contact.ctaText')}</p>
-          </div>
-          <Link href="/rutas" className="btn btn-primary shrink-0">
-            {t('contact.ctaButton')}
-            <ArrowUpRight className="h-4 w-4" strokeWidth={1.9} />
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

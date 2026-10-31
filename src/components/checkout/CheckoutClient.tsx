@@ -4,10 +4,12 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { Price } from '@/components/Price';
 import {
   AlertCircle,
   ArrowLeft,
   ArrowRight,
+  ChevronDown,
   CreditCard,
   Loader2,
   LockKeyhole,
@@ -17,7 +19,12 @@ import {
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { products } from '@/data/products';
-import { formatDate, formatPrice } from '@/lib/utils';
+import {
+  getCountryOptions,
+  getMexicanStateName,
+  getMexicanStateOptions,
+} from '@/lib/address-options';
+import { formatDate } from '@/lib/utils';
 import type { OrderSummary } from '@/types';
 
 type FormState = {
@@ -74,6 +81,8 @@ export function CheckoutClient() {
   const router = useRouter();
   const { locale, t } = useLanguage();
   const { items, subtotal: total, getSubtotal, getTaxIncluded, clearCart } = useCart();
+  const countryOptions = getCountryOptions(locale);
+  const stateOptions = getMexicanStateOptions(locale);
   const [mounted, setMounted] = useState(false);
   const [form, setForm] = useState<FormState>({
     firstName: '',
@@ -83,9 +92,9 @@ export function CheckoutClient() {
     address: '',
     address2: '',
     city: '',
-    state: '',
+    state: 'CMX',
     postalCode: '',
-    country: t('checkout.countryDefault'),
+    country: 'MX',
     company: '',
     cardNumber: '',
     cardName: '',
@@ -97,6 +106,9 @@ export function CheckoutClient() {
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<'idle' | 'processing'>('idle');
   const [serverError, setServerError] = useState('');
+  const [couponOpen, setCouponOpen] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
+  const [couponError, setCouponError] = useState<'invalid' | 'required' | ''>('');
 
   useEffect(() => setMounted(true), []);
 
@@ -119,6 +131,10 @@ export function CheckoutClient() {
     setForm((current) => ({ ...current, [key]: value }));
     setErrors((current) => ({ ...current, [key]: false }));
     setServerError('');
+  };
+
+  const applyCoupon = () => {
+    setCouponError(couponCode.trim() ? 'invalid' : 'required');
   };
 
   const validate = () => {
@@ -169,7 +185,7 @@ export function CheckoutClient() {
             address: form.address,
             address2: form.address2,
             city: form.city,
-            state: form.state,
+            state: getMexicanStateName(form.state, locale),
             postalCode: form.postalCode,
             country: form.country,
             company: form.company,
@@ -279,10 +295,6 @@ export function CheckoutClient() {
                 {t('checkout.description')}
               </p>
             </div>
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-cream-100/20 bg-cream-100/5 px-4 py-2 text-[0.6rem] font-bold uppercase tracking-[0.14em] text-cream-100/70">
-              <ShieldCheck className="h-3.5 w-3.5 text-maize-300" strokeWidth={1.8} />
-              {t('checkout.etominNote')}
-            </span>
           </div>
         </div>
       </section>
@@ -410,16 +422,21 @@ export function CheckoutClient() {
                     <label htmlFor="state" className="label">
                       {t('checkout.state')}
                     </label>
-                    <input
+                    <select
                       id="state"
-                      type="text"
                       autoComplete="address-level1"
                       value={form.state}
                       onChange={(event) => update('state', event.target.value)}
-                      className={fieldClass('state')}
+                      className={`${fieldClass('state')} select`}
                       aria-invalid={errors.state}
                       required
-                    />
+                    >
+                      {stateOptions.map((state) => (
+                        <option key={state.code} value={state.code}>
+                          {state.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div>
                     <label htmlFor="postalCode" className="label">
@@ -440,16 +457,21 @@ export function CheckoutClient() {
                     <label htmlFor="country" className="label">
                       {t('checkout.country')}
                     </label>
-                    <input
+                    <select
                       id="country"
-                      type="text"
                       autoComplete="country-name"
                       value={form.country}
                       onChange={(event) => update('country', event.target.value)}
-                      className={fieldClass('country')}
+                      className={`${fieldClass('country')} select`}
                       aria-invalid={errors.country}
                       required
-                    />
+                    >
+                      {countryOptions.map((country) => (
+                        <option key={country.code} value={country.code}>
+                          {country.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="sm:col-span-2">
                     <label htmlFor="company" className="label">
@@ -471,14 +493,14 @@ export function CheckoutClient() {
               </div>
 
               <div className="rounded-[1.75rem] border border-jade-900/10 bg-cream-50 p-6 shadow-soft md:p-8">
-                <div className="flex items-center justify-between gap-3 border-b border-jade-900/10 pb-5">
+                <div className="flex flex-col gap-4 border-b border-jade-900/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-jade-900 text-cream-100">
                       <CreditCard className="h-4 w-4" strokeWidth={1.7} />
                     </span>
                     <h2 className="font-display text-2xl font-medium text-jade-900">{t('checkout.cardTitle')}</h2>
                   </div>
-                  <div className="hidden items-center gap-1.5 sm:flex">
+                  <div className="flex items-center gap-1.5">
                     {[
                       { src: '/visa.svg', alt: 'Visa' },
                       { src: '/mastercard.svg', alt: 'Mastercard' },
@@ -490,6 +512,9 @@ export function CheckoutClient() {
                         <Image src={method.src} alt={method.alt} width={36} height={18} className="h-3.5 w-auto" />
                       </span>
                     ))}
+                    <span className="flex h-7 items-center justify-center rounded border border-jade-700 bg-jade-700 px-2">
+                      <Image src="/etomin.svg" alt="Etomin" width={62} height={16} className="h-4 w-auto" />
+                    </span>
                   </div>
                 </div>
 
@@ -645,6 +670,62 @@ export function CheckoutClient() {
                   {items.length === 1 ? t('common.experience') : t('common.experiences')}
                 </p>
 
+                <div className="mt-5 rounded-xl border border-jade-900/10 bg-cream-100/70 p-4">
+                  <button
+                    type="button"
+                    aria-expanded={couponOpen}
+                    aria-controls="checkout-coupon-panel"
+                    onClick={() => setCouponOpen((open) => !open)}
+                    className="flex w-full items-center justify-between gap-3 text-left text-[0.72rem] font-semibold text-jade-900 transition-colors hover:text-clay-600"
+                  >
+                    <span>{t('checkout.couponPrompt')}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 shrink-0 transition-transform ${couponOpen ? 'rotate-180' : ''}`}
+                      strokeWidth={1.8}
+                    />
+                  </button>
+                  {couponOpen && (
+                    <div id="checkout-coupon-panel" className="mt-4">
+                      <label htmlFor="checkout-coupon" className="label">
+                        {t('checkout.couponLabel')}
+                      </label>
+                      <div className="flex flex-col gap-2 sm:flex-row">
+                        <input
+                          id="checkout-coupon"
+                          type="text"
+                          autoComplete="off"
+                          value={couponCode}
+                          onChange={(event) => {
+                            setCouponCode(event.target.value);
+                            setCouponError('');
+                          }}
+                          onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                              event.preventDefault();
+                              applyCoupon();
+                            }
+                          }}
+                          className="input min-w-0 flex-1"
+                          aria-invalid={Boolean(couponError)}
+                          aria-describedby={couponError ? 'checkout-coupon-error' : undefined}
+                        />
+                        <button type="button" onClick={applyCoupon} className="btn btn-outline">
+                          {t('checkout.couponApply')}
+                        </button>
+                      </div>
+                      {couponError && (
+                        <p
+                          id="checkout-coupon-error"
+                          role="alert"
+                          className="mt-2 text-[0.68rem] font-semibold text-clay-600"
+                        >
+                          {t(couponError === 'invalid' ? 'checkout.couponInvalid' : 'checkout.couponRequired')}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 <ul className="mt-5 space-y-3">
                   {lineItems.map(({ product, quantity, date }) => (
                     <li key={`${product.slug}-${date}`} className="flex gap-3">
@@ -667,7 +748,7 @@ export function CheckoutClient() {
                         </p>
                       </div>
                       <p className="shrink-0 text-[0.72rem] font-bold text-jade-900">
-                        {formatPrice(product.price * quantity, locale)}
+                        <Price value={product.price * quantity} locale={locale} />
                       </p>
                     </li>
                   ))}
@@ -676,18 +757,18 @@ export function CheckoutClient() {
                 <dl className="mt-5 space-y-2.5 border-t border-jade-900/10 pt-4 text-[0.78rem]">
                   <div className="flex items-center justify-between text-muted">
                     <dt>{t('checkout.subtotal')}</dt>
-                    <dd className="font-semibold text-jade-900">{formatPrice(subtotal, locale)}</dd>
+                    <dd className="font-semibold text-jade-900"><Price value={subtotal} locale={locale} /></dd>
                   </div>
                   <div className="flex items-center justify-between text-muted">
                     <dt>{t('cart.taxIncluded')}</dt>
-                    <dd className="font-semibold text-jade-900">{formatPrice(tax, locale)}</dd>
+                    <dd className="font-semibold text-jade-900"><Price value={tax} locale={locale} /></dd>
                   </div>
                   <div className="flex items-center justify-between border-t border-jade-900/10 pt-3">
                     <dt className="text-[0.64rem] font-bold uppercase tracking-[0.14em] text-jade-900">
                       {t('checkout.total')}
                     </dt>
                     <dd className="font-display text-2xl font-medium text-jade-900">
-                      {formatPrice(total, locale)}
+                      <Price value={total} locale={locale} />
                     </dd>
                   </div>
                 </dl>
@@ -716,9 +797,6 @@ export function CheckoutClient() {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-jade-900/10 bg-cream-200/70 p-4 text-center">
-                <p className="text-[0.66rem] leading-relaxed text-muted">{t('checkout.etominNote')}</p>
-              </div>
             </aside>
           </form>
         </div>

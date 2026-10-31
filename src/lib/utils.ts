@@ -1,15 +1,12 @@
 import type { Locale } from '@/types';
+import { formatMXN } from '@/lib/format';
 
 export function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(' ');
 }
 
 export function formatPrice(value: number, locale: Locale = 'es') {
-  return new Intl.NumberFormat(locale === 'es' ? 'es-MX' : 'en-US', {
-    style: 'currency',
-    currency: 'MXN',
-    maximumFractionDigits: 0,
-  }).format(value);
+  return formatMXN(value, locale);
 }
 
 export function formatDate(value: string, locale: Locale = 'es') {

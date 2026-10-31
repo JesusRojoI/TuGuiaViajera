@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowRight, Compass, Flame, PencilRuler } from 'lucide-react';
+import { Compass, Flame, PencilRuler } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -15,26 +14,15 @@ export function HowItWorks() {
     <section id="como" className="section relative overflow-hidden bg-cream-100">
       <div className="pointer-events-none absolute right-0 top-24 h-64 w-64 rounded-full border border-jade-900/[0.06]" />
       <div className="container-tgv relative">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div className="max-w-2xl">
           <Reveal>
             <p className="eyebrow">{t('home.how.eyebrow')}</p>
-            <h2 className="title-serif mt-5 max-w-2xl text-[clamp(2.5rem,5vw,4.5rem)] text-jade-900">
+            <h2 className="title-serif mt-5 text-[clamp(2.5rem,5vw,4.5rem)] text-jade-900">
               {t('home.how.title')}
             </h2>
-          </Reveal>
-          <Reveal delay={1} className="lg:pb-2">
-            <p className="max-w-md text-[0.95rem] leading-relaxed text-muted lg:ml-auto">
+            <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted">
               {t('home.how.subtitle')}
             </p>
-            <Link
-              href="/contacto"
-              className="mt-5 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-clay-600 transition-colors hover:text-clay-800"
-            >
-              {t('home.how.cta')}
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-clay-500/30">
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.9} />
-              </span>
-            </Link>
           </Reveal>
         </div>
 
@@ -67,13 +55,6 @@ export function HowItWorks() {
             );
           })}
         </div>
-
-        <Reveal delay={2} className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-jade-900/10 pt-5">
-          <p className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-muted/70">
-            {t('product.durationNote')}
-          </p>
-          <div className="dotted-line h-px w-28 opacity-60 md:w-44" />
-        </Reveal>
       </div>
     </section>
   );

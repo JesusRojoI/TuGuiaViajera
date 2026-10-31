@@ -944,7 +944,24 @@ export const products: Product[] = [
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 
-export const featuredProducts = products.filter((p) => p.featured);
+const FEATURED_ORDER = [
+  'valle-de-guadalupe-tres-casas-boutique-con-sommelier',
+  'ruta-de-los-siete-moles-de-oaxaca',
+  'ruta-de-la-cochinita-y-los-sabores-del-mayab',
+  'ruta-de-mariscos-en-la-costa-de-sinaloa',
+  'ruta-del-maiz-criollo-en-la-mixteca',
+  'ruta-del-mole-poblano-y-la-cocina-conventual',
+  'ruta-del-queso-y-vino-queretaro',
+  'ruta-del-cafe-de-veracruz-coatepec-xico-coscomatepec',
+] as const;
+
+export const featuredProducts = FEATURED_ORDER.map((slug) => {
+  const product = getProduct(slug);
+  if (!product?.featured) {
+    throw new Error(`Featured product "${slug}" is missing or not marked as featured.`);
+  }
+  return product;
+});
 
 export const categoryCounts = {
   talleres: products.filter((p) => p.category === 'talleres').length,

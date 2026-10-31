@@ -15,10 +15,11 @@ import {
   Users,
 } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
+import { Price } from '@/components/Price';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { products } from '@/data/products';
-import { formatDate, formatPrice } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 
 export function CartClient() {
   const { locale, t } = useLanguage();
@@ -165,7 +166,7 @@ export function CartClient() {
                             </div>
                             <div className="text-right">
                               <p className="font-display text-xl font-medium text-jade-900">
-                                {formatPrice(product.price * item.quantity, locale)}
+                                <Price value={product.price * item.quantity} locale={locale} />
                               </p>
                               <p className="text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-muted/65">
                                 {t('common.vatIncluded')}
@@ -186,12 +187,6 @@ export function CartClient() {
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" strokeWidth={1.8} />
                     {t('cart.continue')}
                   </Link>
-                  <Link
-                    href="/contacto"
-                    className="text-[0.66rem] font-bold uppercase tracking-[0.14em] text-clay-600 transition-colors hover:text-clay-700"
-                  >
-                    {t('cart.questionCta')}
-                  </Link>
                 </div>
               </div>
 
@@ -202,18 +197,18 @@ export function CartClient() {
                   <dl className="mt-6 space-y-3 text-[0.82rem]">
                     <div className="flex items-center justify-between text-muted">
                       <dt>{t('cart.subtotal')}</dt>
-                      <dd className="font-semibold text-jade-900">{formatPrice(subtotal, locale)}</dd>
+                      <dd className="font-semibold text-jade-900"><Price value={subtotal} locale={locale} /></dd>
                     </div>
                     <div className="flex items-center justify-between text-muted">
                       <dt>{t('cart.taxIncluded')}</dt>
-                      <dd className="font-semibold text-jade-900">{formatPrice(tax, locale)}</dd>
+                      <dd className="font-semibold text-jade-900"><Price value={tax} locale={locale} /></dd>
                     </div>
                     <div className="flex items-center justify-between border-t border-jade-900/10 pt-3">
                       <dt className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-jade-900">
                         {t('cart.total')}
                       </dt>
                       <dd className="font-display text-2xl font-medium text-jade-900">
-                        {formatPrice(total, locale)}
+                        <Price value={total} locale={locale} />
                       </dd>
                     </div>
                   </dl>

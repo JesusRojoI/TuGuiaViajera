@@ -22,7 +22,7 @@ export function FeaturedRoutes() {
   };
 
   return (
-    <section className="section bg-cream-100">
+    <section id="rutas-destacadas" className="section bg-cream-100">
       <div className="container-tgv">
         <div className="flex flex-col gap-6 border-b border-jade-900/10 pb-8 md:flex-row md:items-end md:justify-between">
           <Reveal className="max-w-2xl">

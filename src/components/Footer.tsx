@@ -68,8 +68,10 @@ export default function Footer() {
               <MapPin size={15} />
             </span>
             <span>
-              <strong>{t('footer.country')}</strong>
-              <small>{t('footer.countryNote')}</small>
+              <strong className="!text-[0.72rem] !font-medium leading-snug text-cream-100/90">
+                {t('footer.address')}
+              </strong>
+              <small>{t('footer.country')}</small>
             </span>
           </div>
         </div>

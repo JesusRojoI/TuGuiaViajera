@@ -3,10 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
+import { Price } from '@/components/Price';
 import { useCart } from '@/context/CartContext';
 import { useI18n } from '@/lib/i18n';
 import { getProduct } from '@/data/products';
-import { formatDate, formatMXN } from '@/lib/format';
+import { formatDate } from '@/lib/format';
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, subtotal } =
@@ -114,7 +115,7 @@ export default function CartDrawer() {
                     </div>
                     <div className="cart-drawer-price">
                       <strong>
-                        {formatMXN(product.price * item.quantity, locale)}
+                        <Price value={product.price * item.quantity} locale={locale} />
                       </strong>
                       <button
                         type="button"
@@ -131,7 +132,7 @@ export default function CartDrawer() {
             <div className="cart-drawer-foot">
               <div className="cart-drawer-total">
                 <span>{t('common.cart.total')}</span>
-                <strong>{formatMXN(subtotal, locale)}</strong>
+                <strong><Price value={subtotal} locale={locale} /></strong>
               </div>
               <p className="cart-drawer-note">{t('common.cart.note')}</p>
               <Link

@@ -15,7 +15,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { formatDate, formatPrice } from '@/lib/utils';
+import { Price } from '@/components/Price';
+import { formatDate } from '@/lib/utils';
 import type { OrderSummary } from '@/types';
 
 export function SuccessClient() {
@@ -101,7 +102,7 @@ export function SuccessClient() {
                 {t('success.total')}
               </p>
               <p className="mt-1.5 font-display text-xl font-medium text-maize-300">
-                {formatPrice(order.total, locale)}
+                <Price value={order.total} locale={locale} />
               </p>
             </div>
             <div className="rounded-2xl border border-cream-100/15 bg-cream-100/[0.06] px-4 py-4 backdrop-blur-sm">
@@ -149,7 +150,7 @@ export function SuccessClient() {
                     </div>
                   </div>
                   <p className="shrink-0 text-[0.82rem] font-bold text-jade-900">
-                    {formatPrice(item.price * item.quantity, locale)}
+                    <Price value={item.price * item.quantity} locale={locale} />
                   </p>
                 </li>
               ))}
@@ -160,7 +161,7 @@ export function SuccessClient() {
                 {t('success.total')}
               </span>
               <span className="font-display text-2xl font-medium text-jade-900">
-                {formatPrice(order.total, locale)}
+                <Price value={order.total} locale={locale} />
               </span>
             </div>
 

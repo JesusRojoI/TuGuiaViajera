@@ -23,6 +23,7 @@
     "hours": "Mon to Fri · 9:00–18:00 Mexico City time"
   },
   "common": {
+    "mxnPrefix": "MXN",
     "from": "From",
     "perPerson": "Per person",
     "vatIncluded": "VAT included",
@@ -98,6 +99,11 @@
     "experiences": "experiences"
   },
   "home": {
+    "routeStory": {
+      "line1": "Every route has cooks.",
+      "line2": "Every cook, a story.",
+      "cta": "Design your route"
+    },
     "hero": {
       "eyebrow": "Journeys to taste Mexico",
       "title1": "Meet the real",
@@ -380,6 +386,7 @@
     "interestPlaceholder": "Choose an option"
   },
   "cart": {
+    "adultsLine": "adults",
     "eyebrow": "Your booking",
     "title": "Your cart",
     "emptyTitle": "Your cart is empty",
@@ -403,6 +410,7 @@
     "taxIncluded": "VAT included (16%)"
   },
   "checkout": {
+    "adultsLine": "adults",
     "eyebrow": "Protected payment",
     "title": "Complete your booking",
     "description": "Enter your details and pay. You will receive the full itinerary by email within 24 hours.",
@@ -418,6 +426,8 @@
     "postalCode": "Postal code",
     "country": "Country",
     "countryDefault": "Mexico",
+    "locationTitle": "Country and state",
+    "locationNote": "Choose a country and state to complete the demo. This information is not saved.",
     "company": "Company",
     "cardTitle": "Card information",
     "cardNumber": "Card number",
@@ -428,6 +438,11 @@
     "pay": "Pay",
     "processing": "Processing the payment…",
     "secureNote": "Your details are sent encrypted and the payment is processed by Etomin.",
+    "couponPrompt": "Have a coupon? Click here to enter your code.",
+    "couponLabel": "Discount code",
+    "couponApply": "Apply",
+    "couponInvalid": "This coupon is not valid.",
+    "couponRequired": "Enter a coupon code.",
     "summaryTitle": "Booking",
     "items": "Experiences",
     "subtotal": "Subtotal",
@@ -439,7 +454,6 @@
     "errorGeneric": "Check the card details and try again. If the problem continues, email us at support@tuguiaviajera.com.",
     "paymentNotConfigured": "The payment gateway is not enabled. Email us at support@tuguiaviajera.com to finish your booking.",
     "validationError": "Review the highlighted fields and try again.",
-    "etominNote": "Etomin processes the payment securely",
     "termsConjunction": "and the",
     "terms": "I accept the terms and conditions and the privacy notice.",
     "termsLink": "terms and conditions",
@@ -473,6 +487,7 @@
     "updated": "Last updated"
   },
   "footer": {
+    "address": "Av. Revolución 1564, San Ángel, Álvaro Obregón, 01020 Ciudad de México, CDMX",
     "tagline": "The taste of Mexico, served at its table and told in its own words.",
     "description": "Food journeys and immersions with traditional cooks, producers and markets that carry history.",
     "exploreTitle": "Discover",
