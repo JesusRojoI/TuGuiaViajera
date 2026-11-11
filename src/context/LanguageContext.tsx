@@ -19,12 +19,6 @@ const messagesMap: Record<Locale, Messages> = {
   en: enMessages as Messages,
 };
 
-type Primitive = string | number | boolean | null;
-type TranslationValue =
-  | Primitive
-  | TranslationValue[]
-  | { [key: string]: TranslationValue };
-
 interface LanguageContextValue {
   locale: Locale;
   setLocale: (locale: Locale) => void;

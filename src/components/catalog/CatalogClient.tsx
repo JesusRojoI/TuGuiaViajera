@@ -21,7 +21,7 @@ const categoryFilters: { id: Filter; key: string }[] = [
 ];
 
 export function CatalogClient() {
-  const { t, locale } = useLanguage();
+  const { t } = useLanguage();
   const [filter, setFilter] = useState<Filter>('all');
 
   const visible = useMemo(

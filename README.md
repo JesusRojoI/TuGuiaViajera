@@ -3,8 +3,8 @@
 Replica funcional de una plataforma de rutas e inmersiones gastronómicas en México
 para la marca **Tu Guía Viajera** (`tuguiaviajera.com`).
 
-Construida con **Next.js 14 (App Router)**, **React 18**, **TypeScript** y
-**Tailwind CSS**. Incluye catálogo de 17 experiencias, detalle de producto,
+Construida con **Next.js 16 (App Router)**, **React 19**, **TypeScript** y
+**Tailwind CSS 4**. Incluye catálogo de 17 experiencias, detalle de producto,
 carrito persistente, checkout con **Etomin**, correos transaccionales con
 **Resend**, contenido bilingüe español/inglés y páginas legales.
 
@@ -12,8 +12,8 @@ carrito persistente, checkout con **Etomin**, correos transaccionales con
 
 ## Requisitos
 
-- Node.js 18.17 o superior
-- npm 9 o superior
+- Node.js 20.9 o superior
+- npm 10 o superior
 - Cuenta de Etomin (pagos) y/o Resend (correo) para producción
 
 ## Instalación
@@ -33,7 +33,7 @@ La aplicación queda disponible en **http://localhost:3002**.
 | `npm run dev` | Servidor de desarrollo en el puerto 3002 |
 | `npm run build` | Compilación de producción |
 | `npm start` | Servidor de producción en el puerto 3002 |
-| `npm run lint` | Linter de Next.js |
+| `npm run lint` | Linter con ESLint (flat config) |
 | `npm run email:test` | Diagnóstico del proveedor de correo (ver sección Correo) |
 
 > `npm run dev` arranca con `scripts/dev.mjs`. Si el puerto 3002 está libre,

@@ -30,8 +30,8 @@ const caveat = Caveat({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://tuguiaviajera.com';
 
-export function generateMetadata(): Metadata {
-  const isEnglish = cookies().get('NEXT_LOCALE')?.value === 'en';
+export async function generateMetadata(): Promise<Metadata> {
+  const isEnglish = (await cookies()).get('NEXT_LOCALE')?.value === 'en';
   const title = isEnglish
     ? 'Tu Guía Viajera · Taste authentic Mexico'
     : 'Tu Guía Viajera · Saborea el México auténtico';
@@ -102,18 +102,19 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieLocale = cookies().get('NEXT_LOCALE')?.value;
+  const cookieLocale = (await cookies()).get('NEXT_LOCALE')?.value;
   const locale: Locale = cookieLocale === 'en' ? 'en' : 'es';
 
   return (
     <html
       lang={locale}
       className={`${fraunces.variable} ${manrope.variable} ${caveat.variable}`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body>
